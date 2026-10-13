@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin dashboard | FoodRescue AI</title>
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="admin-dashboard">
+  <a class="sr-only" href="#content">Skip to content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Navigation"></aside>
+    <div class="main">
+      <header class="topbar">
+        <div class="row">
+          <button class="btn btn-secondary btn-sm mobile-menu" id="menu-btn" type="button" aria-controls="sidebar">Menu</button>
+          <h1 id="page-title">Administration</h1>
+        </div>
+        <div class="actions" id="topbar-actions"></div>
+      </header>
+      <main class="content" id="content">
+        <div class="row between">
+          <p class="mb-0 muted">Live figures from the platform database.</p>
+          <button class="btn btn-secondary btn-sm" type="button" id="run-maintenance">Run expiry sweep now</button>
+        </div>
+        <section class="stats" id="stats" aria-label="Platform totals"></section>
+        <div class="grid-2">
+          <section class="panel"><div class="panel-head"><h3>Activity, last 14 days</h3></div><div id="activity-chart"></div></section>
+          <section class="panel"><div class="panel-head"><h3>Donations by status</h3></div><div id="status-chart"></div></section>
+          <section class="panel"><div class="panel-head"><h3>Food offered by category</h3></div><div id="category-chart"></div></section>
+          <section class="panel"><div class="panel-head"><h3>Users by role</h3></div><div id="users-by-role"></div>
+            <h3 class="mt-5">Matching summary</h3><div id="match-summary"></div></section>
+        </div>
+        <section class="panel" id="donations">
+          <div class="panel-head"><h2>Donations</h2></div>
+          <div class="tabs" id="donation-tabs" role="tablist" aria-label="Filter donations"></div>
+          <div id="donations-list" class="mt-4"></div>
+        </section>
+        <section class="panel" id="matches">
+          <div class="panel-head"><h2>Matching results</h2><span class="small muted">F freshness, G proximity, C capacity fit, Q demand fit, P priority</span></div>
+          <div class="tabs" id="match-tabs" role="tablist" aria-label="Filter recommendations"></div>
+          <div id="matches-list" class="mt-4"></div>
+        </section>
+        <section class="panel" id="users">
+          <div class="panel-head"><h2>Users</h2></div>
+          <div class="tabs" id="user-tabs" role="tablist" aria-label="Filter users"></div>
+          <div id="users-list" class="mt-4"></div>
+          <h3 class="mt-5">NGOs and food banks</h3>
+          <div id="ngos-list"></div>
+        </section>
+        <section class="panel" id="reports">
+          <div class="panel-head"><h2>Reported records</h2></div>
+          <div class="tabs" id="report-tabs" role="tablist" aria-label="Filter reports"></div>
+          <div id="reports-list" class="mt-4"></div>
+        </section>
+        <section class="panel" id="audit">
+          <div class="panel-head"><h2>Audit log</h2></div>
+          <div id="audit-list"></div>
+        </section>
+        <section class="panel" id="benchmark">
+          <div class="panel-head"><h2>Synthetic benchmark</h2><button class="btn btn-primary btn-sm" type="button" id="run-benchmark">Run benchmark (seed 7)</button></div>
+          <div id="benchmark-body"><div class="loading">Loading...</div></div>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

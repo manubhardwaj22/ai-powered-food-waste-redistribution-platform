@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FoodRescue AI | Surplus food to the people who need it</title>
+  <meta name="description" content="FoodRescue AI connects food donors with NGOs and food banks using an explainable weighted matching algorithm.">
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="landing">
+  <a class="sr-only" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/images/logo.svg" alt="">FoodRescue AI</a>
+      <button class="btn btn-secondary btn-sm menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <a href="#how">How it works</a>
+        <a href="#roles">Who it's for</a>
+        <a href="about.html">About the project</a>
+        <a class="btn btn-secondary btn-sm" id="account-link" href="login.html">Sign in</a>
+        <a class="btn btn-primary btn-sm" id="register-link" href="register.html">Create account</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <h1>Surplus food, matched to the nearest kitchen that needs it.</h1>
+          <p class="lead">Restaurants, bakeries, hotels and caterers post edible surplus. FoodRescue AI ranks nearby NGOs and food banks by freshness, distance, capacity, demand and priority, then coordinates a volunteer pickup.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="register.html?role=donor">Donate surplus food</a>
+            <a class="btn btn-secondary" href="register.html?role=ngo">Register an NGO</a>
+            <a class="btn btn-ghost" href="register.html?role=volunteer">Volunteer to deliver</a>
+          </div>
+        </div>
+        <div class="demo-card" id="calculator" aria-label="Interactive scoring example">
+          <div class="loading">Loading the scoring example...</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>The problem</h2>
+        <p class="section-intro">Cooked meals and fresh produce lose value by the hour. Most surplus is thrown away not because nobody needs it, but because the right recipient isn't found in time.</p>
+        <div class="problem-grid">
+          <div><h3>Time runs out</h3><p>Prepared meals may be usable for only a few hours. A slow phone tree means food expires before anyone collects it.</p></div>
+          <div><h3>Mismatched needs</h3><p>A food bank may lack cold storage for dairy, or already be full. Sending food there just moves the waste.</p></div>
+          <div><h3>No one to carry it</h3><p>Even a good match fails without a volunteer who can reach the pickup point in time with enough vehicle space.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="how">
+      <div class="container">
+        <h2>How it works</h2>
+        <p class="section-intro">Every recommendation shows its score and the reason behind it. Final decisions stay with people.</p>
+        <ol class="steps">
+          <li><h3>Post</h3><p>A donor lists the food, quantity, remaining usable life, pickup point and window.</p></li>
+          <li><h3>Match</h3><p>Infeasible NGOs are filtered out, then the rest are ranked by a weighted score with a plain-language explanation.</p></li>
+          <li><h3>Accept</h3><p>The NGO accepts or declines. Capacity and demand are reserved atomically, so food is never double-allocated.</p></li>
+          <li><h3>Deliver</h3><p>A nearby available volunteer accepts the task and confirms pickup and delivery, with timestamps.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="roles">
+      <div class="container">
+        <h2>Who it's for</h2>
+        <div class="roles">
+          <article><h3>Donors</h3><ul><li>Post surplus in under a minute</li><li>See which NGOs fit and why</li><li>Track pickup and delivery</li></ul></article>
+          <article><h3>NGOs and food banks</h3><ul><li>Only see food you can accept and store</li><li>Keep capacity and demand current</li><li>Track incoming deliveries and impact</li></ul></article>
+          <article><h3>Volunteers</h3><ul><li>Set your area, vehicle and availability</li><li>Accept tasks you can reach</li><li>Confirm pickup and delivery in one tap</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Food we handle</h2>
+        <div class="categories">
+          <span>Prepared meals</span><span>Bakery products</span><span>Fruits and vegetables</span><span>Dairy products</span><span>Packaged foods</span>
+        </div>
+        <p class="notice mt-4">Matching does not certify food safety. Donors and recipients must check condition, temperature and packaging before handover and before distribution.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <h2>Results on a simulated benchmark</h2>
+        <p class="section-intro">Values published in the project report for the proposed method on a synthetic dataset (900 offers, 90 NGOs, random seed 7). They are simulation results, not figures from a real deployment.</p>
+        <div class="metric-strip">
+          <div><b>64.17%</b><span class="small">quantity fulfilment</span></div>
+          <div><b>94.65%</b><span class="small">urgent offers rescued</span></div>
+          <div><b>3.35 km</b><span class="small">average match distance</span></div>
+          <div><b>59.89%</b><span class="small">offers fully matched</span></div>
+          <div><b>35.83%</b><span class="small">unassigned quantity</span></div>
+        </div>
+        <p class="small muted mt-3">Source: project report (reference values). The application's own reproduction of this benchmark is documented in docs/algorithm.md.</p>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <div class="container row between">
+        <div><h2>Have surplus food today?</h2><p>Post it now and see ranked recipients in seconds.</p></div>
+        <div class="row"><a class="btn btn-secondary" href="register.html">Create an account</a><a class="btn btn-ghost" href="login.html">Sign in</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <h4>AI-Powered Food Waste Donation &amp; Redistribution Platform</h4>
+          <p>Academic project by Team 56, Bennett University, India: Manu Bhardwaj and Amul Sharma.</p>
+        </div>
+        <div><h4>Platform</h4><ul><li><a href="#how">How it works</a></li><li><a href="about.html">About &amp; algorithm</a></li><li><a href="/docs">API documentation</a></li></ul></div>
+        <div><h4>Account</h4><ul><li><a href="login.html">Sign in</a></li><li><a href="register.html">Create account</a></li></ul></div>
+      </div>
+      <div class="footer-base">FoodRescue AI is a student prototype. Organisations and data in the demo are fictional.</div>
+    </div>
+  </footer>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/landing.js"></script>
+</body>
+</html>

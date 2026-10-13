@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account | FoodRescue AI</title>
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="register">
+  <div class="auth-page">
+    <aside class="auth-aside">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/images/logo.svg" alt="">FoodRescue AI</a>
+      <div>
+        <h2>Join the people moving surplus food to where it's needed.</h2>
+        <ul>
+          <li>Your password is stored only as a bcrypt hash.</li>
+          <li>Your location is used to calculate distances for matching.</li>
+          <li>Contact details are shown only to the people on a confirmed pickup.</li>
+        </ul>
+      </div>
+      <p class="small">Team 56, Bennett University</p>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-card">
+        <h1>Create an account</h1>
+        <form id="register-form" class="stack" novalidate>
+          <div class="notice error hidden" id="form-error" role="alert"></div>
+
+          <fieldset>
+            <legend>I am joining as</legend>
+            <div class="role-picker">
+              <label><input type="radio" name="role" value="donor" checked><strong>Donor</strong>Restaurant, hotel, bakery, caterer, retailer</label>
+              <label><input type="radio" name="role" value="ngo"><strong>NGO / food bank</strong>Receives and distributes food</label>
+              <label><input type="radio" name="role" value="volunteer"><strong>Volunteer</strong>Picks up and delivers</label>
+            </div>
+          </fieldset>
+
+          <div class="form-grid">
+            <div class="field"><label for="full_name">Your full name</label><input id="full_name" name="full_name" required minlength="2" maxlength="120" autocomplete="name"><span class="error"></span></div>
+            <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" maxlength="30" autocomplete="tel"><span class="error"></span></div>
+            <div class="field span-2"><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"><span class="error"></span></div>
+            <div class="field"><label for="password">Password</label><input id="password" name="password" type="password" required minlength="8" maxlength="72" autocomplete="new-password"><span class="hint">At least 8 characters with a letter and a digit.</span><span class="error"></span></div>
+            <div class="field"><label for="password2">Confirm password</label><input id="password2" name="password2" type="password" required autocomplete="new-password"><span class="error"></span></div>
+            <div class="field span-2" id="org-field"><label for="organization">Business or organisation (optional)</label><input id="organization" name="organization" maxlength="160" autocomplete="organization"><span class="error"></span></div>
+          </div>
+
+          <fieldset id="ngo-fields" class="hidden">
+            <legend>Organisation details</legend>
+            <div class="form-grid">
+              <div class="field span-2"><label for="org_name">Organisation name</label><input id="org_name" name="org_name" required minlength="2" maxlength="160"><span class="error"></span></div>
+              <div class="field span-2"><label for="ngo_address">Address</label><input id="ngo_address" name="ngo_address" required minlength="3" maxlength="255"><span class="error"></span></div>
+              <div class="field"><label for="ngo_lat">Latitude</label><input id="ngo_lat" name="ngo_lat" type="number" step="any" min="-90" max="90" required><span class="error"></span></div>
+              <div class="field"><label for="ngo_lon">Longitude</label><input id="ngo_lon" name="ngo_lon" type="number" step="any" min="-180" max="180" required><span class="error"></span></div>
+              <div class="span-2"><button class="btn btn-secondary btn-sm" type="button" id="ngo-locate">Use my current location</button></div>
+              <div class="field"><label for="capacity_kg">Available storage / distribution capacity (kg)</label><input id="capacity_kg" name="capacity_kg" type="number" min="0" step="0.1" value="50" required><span class="error"></span></div>
+              <div class="field"><label for="demand_kg">Current unmet demand (kg)</label><input id="demand_kg" name="demand_kg" type="number" min="0" step="0.1" value="40" required><span class="error"></span></div>
+              <div class="field span-2"><label for="priority">Service priority (0 to 1)</label><input id="priority" name="priority" type="number" min="0" max="1" step="0.05" value="0.5" required><span class="hint">Higher for vulnerable groups, e.g. children's homes or shelters. May be reviewed by an administrator.</span><span class="error"></span></div>
+              <div class="field span-2"><span class="label">Food categories you can accept</span><div class="checks" id="ngo-categories"></div></div>
+            </div>
+          </fieldset>
+
+          <fieldset id="volunteer-fields" class="hidden">
+            <legend>Volunteer details</legend>
+            <div class="form-grid">
+              <div class="field span-2"><label for="area">Operational area</label><input id="area" name="area" maxlength="160" placeholder="e.g. Knowledge Park, Greater Noida"></div>
+              <div class="field"><label for="vol_lat">Latitude</label><input id="vol_lat" name="vol_lat" type="number" step="any" min="-90" max="90" required><span class="error"></span></div>
+              <div class="field"><label for="vol_lon">Longitude</label><input id="vol_lon" name="vol_lon" type="number" step="any" min="-180" max="180" required><span class="error"></span></div>
+              <div class="span-2"><button class="btn btn-secondary btn-sm" type="button" id="vol-locate">Use my current location</button></div>
+              <div class="field"><label for="vehicle_type">Vehicle</label>
+                <select id="vehicle_type" name="vehicle_type"><option value="bike">Bicycle / two-wheeler</option><option value="car">Car</option><option value="van">Van</option><option value="on_foot">On foot</option></select></div>
+              <div class="field"><label for="vehicle_capacity_kg">Carrying capacity (kg)</label><input id="vehicle_capacity_kg" name="vehicle_capacity_kg" type="number" min="1" step="1" value="25" required><span class="error"></span></div>
+              <div class="field"><label for="max_distance_km">Maximum travel distance (km)</label><input id="max_distance_km" name="max_distance_km" type="number" min="1" step="1" value="10" required><span class="error"></span></div>
+              <div class="field"><label for="constraints">Constraints (optional)</label><input id="constraints" name="constraints" maxlength="255" placeholder="e.g. evenings only, no refrigeration"></div>
+            </div>
+          </fieldset>
+
+          <button class="btn btn-primary" type="submit">Create account</button>
+        </form>
+        <p class="switch">Already registered? <a href="login.html">Sign in</a></p>
+      </div>
+    </main>
+  </div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

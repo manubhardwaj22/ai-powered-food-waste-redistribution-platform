@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | FoodRescue AI</title>
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="login">
+  <div class="auth-page">
+    <aside class="auth-aside">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/images/logo.svg" alt="">FoodRescue AI</a>
+      <div>
+        <h2>Every hour counts for surplus food.</h2>
+        <ul>
+          <li>Donors see which NGOs fit and why.</li>
+          <li>NGOs only receive food they can accept and store.</li>
+          <li>Volunteers pick up tasks within their reach.</li>
+        </ul>
+      </div>
+      <p class="small">Team 56, Bennett University</p>
+    </aside>
+
+    <main class="auth-main">
+      <div class="auth-card">
+        <h1>Sign in</h1>
+        <p class="muted">Use the email and password you registered with.</p>
+        <form id="login-form" class="stack" novalidate>
+          <div class="notice error hidden" id="form-error" role="alert"></div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="username" required>
+          </div>
+          <div class="field">
+            <label for="password">Password</label>
+            <input id="password" name="password" type="password" autocomplete="current-password" required>
+          </div>
+          <button class="btn btn-primary" type="submit">Sign in</button>
+        </form>
+        <p class="switch">New here? <a href="register.html">Create an account</a> &nbsp;|&nbsp; <a href="index.html">Back to home</a></p>
+
+        <details class="demo-accounts">
+          <summary>Use a demo account</summary>
+          <p class="small muted">Available after running <code>python run.py seed</code>. All demo organisations are fictional. Default password: <code>Demo@12345</code>.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Role</th><th>Email</th><th></th></tr></thead>
+              <tbody>
+                <tr><td>Donor</td><td>donor.hotel@foodrescue.example</td><td><button class="btn btn-ghost btn-sm" type="button" data-demo="donor.hotel@foodrescue.example">Fill in</button></td></tr>
+                <tr><td>NGO</td><td>ngo1@foodrescue.example</td><td><button class="btn btn-ghost btn-sm" type="button" data-demo="ngo1@foodrescue.example">Fill in</button></td></tr>
+                <tr><td>Volunteer</td><td>volunteer.arjun@foodrescue.example</td><td><button class="btn btn-ghost btn-sm" type="button" data-demo="volunteer.arjun@foodrescue.example">Fill in</button></td></tr>
+                <tr><td>Admin</td><td>admin@foodrescue.example</td><td><button class="btn btn-ghost btn-sm" type="button" data-demo="admin@foodrescue.example">Fill in</button></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </details>
+      </div>
+    </main>
+  </div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

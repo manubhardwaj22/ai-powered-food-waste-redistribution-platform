@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NGO dashboard | FoodRescue AI</title>
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="ngo-dashboard">
+  <a class="sr-only" href="#content">Skip to content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Navigation"></aside>
+    <div class="main">
+      <header class="topbar">
+        <div class="row">
+          <button class="btn btn-secondary btn-sm mobile-menu" id="menu-btn" type="button" aria-controls="sidebar">Menu</button>
+          <h1 id="page-title">NGO dashboard</h1>
+        </div>
+        <div class="actions" id="topbar-actions"></div>
+      </header>
+      <main class="content" id="content">
+        <p class="mb-0"><strong id="org-name"></strong></p>
+        <section class="stats" id="stats" aria-label="Impact summary"></section>
+        <section class="panel" id="offers">
+          <div class="panel-head"><h2>Recommended offers</h2><a class="small" href="about.html#algorithm">How offers are ranked</a></div>
+          <p class="small muted">You can only accept donations in your accepted categories and within your available capacity. Inspect food on arrival before distributing it.</p>
+          <div id="offers-list"></div>
+        </section>
+        <section class="panel" id="assigned">
+          <div class="panel-head"><h2>Incoming and received</h2></div>
+          <div class="tabs" id="assigned-tabs" role="tablist" aria-label="Filter by status"></div>
+          <div id="assigned-list" class="mt-4"></div>
+        </section>
+        <section class="panel" id="needs">
+          <div class="panel-head"><h2>Capacity and demand</h2></div>
+          <p class="small muted">Keep these current: saving re-runs matching for every open donation.</p>
+          <form id="needs-form" class="stack" novalidate>
+            <div class="form-grid">
+              <div class="field"><label for="capacity_kg">Available capacity (kg)</label><input id="capacity_kg" name="capacity_kg" type="number" min="0" step="0.1" required><span class="error"></span></div>
+              <div class="field"><label for="demand_kg">Unmet demand (kg)</label><input id="demand_kg" name="demand_kg" type="number" min="0" step="0.1" required><span class="error"></span></div>
+              <div class="field"><label for="priority">Service priority (0 to 1)</label><input id="priority" name="priority" type="number" min="0" max="1" step="0.05" required><span class="error"></span></div>
+              <div class="field"><label for="contact_phone">Contact phone</label><input id="contact_phone" name="contact_phone" type="tel" maxlength="30"></div>
+              <div class="field span-2"><label for="address">Address</label><input id="address" name="address" required minlength="3" maxlength="255"><span class="error"></span></div>
+              <div class="field"><label for="latitude">Latitude</label><input id="latitude" name="latitude" type="number" step="any" min="-90" max="90" required><span class="error"></span></div>
+              <div class="field"><label for="longitude">Longitude</label><input id="longitude" name="longitude" type="number" step="any" min="-180" max="180" required><span class="error"></span></div>
+              <div class="span-2"><button class="btn btn-secondary btn-sm" type="button" id="locate">Use my current location</button></div>
+              <div class="field span-2"><span class="label">Accepted food categories</span><div class="checks" id="needs-categories"></div></div>
+            </div>
+            <div><button class="btn btn-primary" type="submit">Save needs</button></div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/ngo.js"></script>
+</body>
+</html>

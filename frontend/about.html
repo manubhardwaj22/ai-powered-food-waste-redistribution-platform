@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About the project | FoodRescue AI</title>
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="about">
+  <a class="sr-only" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container">
+      <a class="brand" href="index.html"><img class="brand-mark" src="assets/images/logo.svg" alt="">FoodRescue AI</a>
+      <button class="btn btn-secondary btn-sm menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+      <nav class="site-nav" id="site-nav" aria-label="Main">
+        <a href="index.html">Home</a>
+        <a href="#algorithm">Algorithm</a>
+        <a href="#limitations">Limitations</a>
+        <a class="btn btn-secondary btn-sm" id="account-link" href="login.html">Sign in</a>
+        <a class="btn btn-primary btn-sm" id="register-link" href="register.html">Create account</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container">
+    <section class="section">
+      <h1>AI-Powered Food Waste Donation &amp; Redistribution Platform</h1>
+      <p class="section-intro">An academic project by Team 56 at Bennett University, India (Manu Bhardwaj, S24BCAU0034; Amul Sharma, S24BCAU0013). FoodRescue AI is the working prototype: it connects food donors with NGOs and food banks and coordinates volunteer deliveries.</p>
+    </section>
+
+    <section class="section" id="algorithm">
+      <h2>How recommendations are calculated</h2>
+      <p class="section-intro">The decision engine is an explainable, AI-assisted weighted scoring model. It is not a trained machine-learning model: every score is a transparent combination of five named factors with fixed weights, so each recommendation can be explained and audited.</p>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>1. Hard feasibility checks</h3>
+          <p>An NGO is removed from consideration if any of these is true:</p>
+          <ul>
+            <li>it does not accept the donation's food category;</li>
+            <li>its available capacity is zero or smaller than the donation;</li>
+            <li>it has no unmet demand;</li>
+            <li>it is outside the service radius (25 km by default) or has invalid coordinates;</li>
+            <li>it already declined this donation.</li>
+          </ul>
+          <p>The donation itself must be open, not expired, and have a valid pickup window that has not closed. Optionally, an available volunteer must be able to reach it.</p>
+        </div>
+        <div class="panel">
+          <h3>2. Five scoring components</h3>
+          <dl class="kv">
+            <dt>Freshness</dt><dd><code>F = 1 - min(T, 24) / 24</code>, T = hours of usable life left</dd>
+            <dt>Proximity</dt><dd><code>G = exp(-D / 5)</code>, D = Haversine distance in km</dd>
+            <dt>Capacity fit</dt><dd><code>C = min(q, c) / max(q, c)</code></dd>
+            <dt>Demand fit</dt><dd><code>Q = min(q, d) / max(q, d)</code></dd>
+            <dt>Priority</dt><dd><code>P</code> in [0, 1], set per NGO</dd>
+          </dl>
+          <p class="mt-3 mb-0">Final score <code>S = wF F + wG G + wC C + wQ Q + wP P</code>, ranked highest first.</p>
+        </div>
+      </div>
+      <div class="panel mt-4">
+        <h3>Weights from the project report</h3>
+        <div id="weights" class="hbars"><div class="loading">Loading weights...</div></div>
+        <p class="small muted mt-3 mb-0">Proximity dominates, so nearby NGOs are strongly preferred; the other factors break ties and promote urgent food, good size fit and high-priority recipients.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Donation lifecycle</h2>
+      <ol class="timeline">
+        <li class="done">Posted<time>donor lists the food</time></li>
+        <li class="done">Matched<time>ranked NGOs found</time></li>
+        <li class="done">Accepted<time>NGO reserves capacity</time></li>
+        <li class="done">Picked up<time>volunteer confirms</time></li>
+        <li class="current">Delivered<time>volunteer confirms</time></li>
+      </ol>
+      <p class="mt-3">Open or accepted donations can be cancelled by the donor, and expire automatically when their usable life runs out. Cancelling or expiry releases any capacity and demand the NGO had reserved. Every state change is written to an audit log.</p>
+    </section>
+
+    <section class="section" id="limitations">
+      <h2>What is real, simulated, or future work</h2>
+      <div class="grid-2">
+        <div class="panel">
+          <h3>Working in this application</h3>
+          <ul>
+            <li>Registration, login and role-based access for donors, NGOs, volunteers and admins</li>
+            <li>The weighted matching engine with explanations</li>
+            <li>Atomic acceptance that prevents double allocation</li>
+            <li>Volunteer tasks with timestamped pickup and delivery</li>
+            <li>In-app notifications, reports and an audit log</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Simulated or not included</h3>
+          <ul>
+            <li>Benchmark results come from a synthetic dataset (seed 7), not a real deployment</li>
+            <li>Distances are straight-line; there is no road-network routing</li>
+            <li>No food-safety certification: people must inspect the food</li>
+            <li>No SMS or email delivery; notifications are in-app only</li>
+            <li>Demo organisations and accounts are fictional</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-base">Team 56, Bennett University, India. Student prototype for academic purposes.</div>
+    </div>
+  </footer>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/about.js"></script>
+</body>
+</html>

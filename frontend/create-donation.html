@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Post a donation | FoodRescue AI</title>
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="create-donation">
+  <a class="sr-only" href="#content">Skip to content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Navigation"></aside>
+    <div class="main">
+      <header class="topbar">
+        <div class="row">
+          <button class="btn btn-secondary btn-sm mobile-menu" id="menu-btn" type="button" aria-controls="sidebar">Menu</button>
+          <h1 id="page-title">Post a donation</h1>
+        </div>
+        <div class="actions" id="topbar-actions"></div>
+      </header>
+      <main class="content" id="content">
+        <section class="panel">
+          <p class="notice info">After you post, the matching engine ranks feasible NGOs immediately. Posting does not certify the food as safe: describe its condition honestly, and the receiving NGO will check it on arrival.</p>
+          <form id="donation-form" class="stack mt-4" novalidate>
+            <div class="notice error hidden" id="form-error" role="alert"></div>
+            <fieldset>
+              <legend>Food</legend>
+              <div class="form-grid">
+                <div class="field span-2"><label for="food_name">What are you donating?</label><input id="food_name" name="food_name" required minlength="2" maxlength="160" placeholder="e.g. Veg pulao and dal"><span class="error"></span></div>
+                <div class="field"><label for="category">Category</label><select id="category" name="category" required></select><span class="error"></span></div>
+                <div class="field"><label for="usable_life_hours">Remaining usable life (hours)</label><input id="usable_life_hours" name="usable_life_hours" type="number" min="0.5" max="8760" step="0.5" value="6" required><span class="hint">Your honest estimate from now. Offers under 6 h are treated as urgent.</span><span class="error"></span></div>
+                <div class="field"><label for="quantity">Quantity</label><input id="quantity" name="quantity" type="number" min="0.1" step="0.1" required><span class="error"></span></div>
+                <div class="field"><label for="unit">Unit</label><select id="unit" name="unit" required></select><span class="error"></span></div>
+                <div class="field span-2" id="kg-field"><label for="quantity_kg">Estimated total weight (kg)</label><input id="quantity_kg" name="quantity_kg" type="number" min="0.1" step="0.1"><span class="hint">Matching compares weights with NGO capacity, so portions, items and packets need an estimate.</span><span class="error"></span></div>
+                <div class="field"><label for="prepared_at">Prepared or packed at</label><input id="prepared_at" name="prepared_at" type="datetime-local"><span class="error"></span></div>
+                <div class="field"><label for="image">Photo (optional, JPEG/PNG/WebP, max 2 MB)</label><input id="image" name="image" type="file" accept="image/jpeg,image/png,image/webp"></div>
+                <div class="field span-2"><label for="preparation_details">Preparation, packaging and storage</label><textarea id="preparation_details" name="preparation_details" maxlength="1000" placeholder="e.g. Cooked at 6 pm, kept in hot cases; sealed foil trays"></textarea><span class="error"></span></div>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Pickup</legend>
+              <div class="form-grid">
+                <div class="field span-2"><label for="pickup_address">Pickup address</label><input id="pickup_address" name="pickup_address" required minlength="3" maxlength="255"><span class="error"></span></div>
+                <div class="field"><label for="latitude">Latitude</label><input id="latitude" name="latitude" type="number" step="any" min="-90" max="90" required><span class="error"></span></div>
+                <div class="field"><label for="longitude">Longitude</label><input id="longitude" name="longitude" type="number" step="any" min="-180" max="180" required><span class="error"></span></div>
+                <div class="span-2"><button class="btn btn-secondary btn-sm" type="button" id="locate">Use my current location</button></div>
+                <div class="field"><label for="pickup_start">Pickup window starts</label><input id="pickup_start" name="pickup_start" type="datetime-local" required><span class="error"></span></div>
+                <div class="field"><label for="pickup_end">Pickup window ends</label><input id="pickup_end" name="pickup_end" type="datetime-local" required><span class="hint">Clipped to the end of the usable life if later.</span><span class="error"></span></div>
+                <div class="field span-2"><label for="notes">Notes for the NGO and volunteer (optional)</label><textarea id="notes" name="notes" maxlength="1000" placeholder="e.g. Use the service entrance; bring insulated bags"></textarea></div>
+              </div>
+            </fieldset>
+            <div class="row"><button class="btn btn-primary" type="submit">Post donation and find matches</button><a class="btn btn-secondary" href="donor-dashboard.html">Cancel</a></div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/donor.js"></script>
+</body>
+</html>

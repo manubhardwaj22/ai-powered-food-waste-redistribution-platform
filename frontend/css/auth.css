@@ -1,0 +1,27 @@
+/* Login and registration pages */
+
+.auth-page { min-height: 100vh; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); }
+.auth-aside {
+  background: var(--ink-900); color: #d7e3db; padding: var(--space-7) var(--space-6);
+  display: flex; flex-direction: column; justify-content: space-between; gap: var(--space-6);
+}
+.auth-aside .brand { color: #fff; }
+.auth-aside h2 { color: #fff; max-width: 14em; }
+.auth-aside ul { padding-left: 1.1em; margin: 0; display: grid; gap: var(--space-2); }
+.auth-main { display: flex; align-items: center; justify-content: center; padding: var(--space-6) var(--space-4); }
+.auth-card { width: min(560px, 100%); }
+.auth-card h1 { font-size: 2rem; }
+.auth-card .switch { margin-top: var(--space-4); font-size: 0.92rem; }
+.role-picker { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-2); }
+.role-picker label {
+  border: 1px solid var(--line); border-radius: var(--radius-m); padding: var(--space-3); cursor: pointer;
+  display: flex; flex-direction: column; gap: 2px; font-size: 0.85rem; color: var(--ink-500);
+}
+.role-picker label strong { color: var(--ink-900); font-size: 0.95rem; }
+.role-picker input { position: absolute; opacity: 0; pointer-events: none; }
+.role-picker label:has(input:checked) { border-color: var(--leaf-600); background: var(--leaf-50); box-shadow: inset 0 0 0 1px var(--leaf-600); }
+.role-picker label:has(input:focus-visible) { box-shadow: var(--focus); }
+.demo-accounts { margin-top: var(--space-5); font-size: 0.88rem; }
+.demo-accounts summary { cursor: pointer; font-weight: 600; color: var(--leaf-700); }
+.demo-accounts table { margin-top: var(--space-2); }
+.demo-accounts button { font-size: 0.8rem; }

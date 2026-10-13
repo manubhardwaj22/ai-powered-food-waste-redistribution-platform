@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Volunteer dashboard | FoodRescue AI</title>
+  <link rel="icon" href="assets/images/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Public+Sans:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body data-page="volunteer-dashboard">
+  <a class="sr-only" href="#content">Skip to content</a>
+  <div class="app">
+    <aside class="sidebar" id="sidebar" aria-label="Navigation"></aside>
+    <div class="main">
+      <header class="topbar">
+        <div class="row">
+          <button class="btn btn-secondary btn-sm mobile-menu" id="menu-btn" type="button" aria-controls="sidebar">Menu</button>
+          <h1 id="page-title">Volunteer dashboard</h1>
+        </div>
+        <div class="actions" id="topbar-actions"></div>
+      </header>
+      <main class="content" id="content">
+        <section class="panel">
+          <label class="check"><input type="checkbox" id="availability"><span id="availability-label">Availability</span></label>
+        </section>
+        <section class="stats" id="stats" aria-label="Your deliveries"></section>
+        <section class="panel" id="mine">
+          <div class="panel-head"><h2>My active tasks</h2></div>
+          <div id="mine-list"></div>
+        </section>
+        <section class="panel" id="available">
+          <div class="panel-head"><h2>Available pickup tasks</h2></div>
+          <p class="small muted">Distances are straight-line estimates. Use the route link for turn-by-turn directions. Donor and NGO contact details appear after you accept.</p>
+          <div id="available-list"></div>
+        </section>
+        <section class="panel">
+          <div class="panel-head"><h2>Completed tasks</h2></div>
+          <div id="done-list"></div>
+        </section>
+        <section class="panel" id="profile">
+          <div class="panel-head"><h2>Location, vehicle and limits</h2></div>
+          <form id="profile-form" class="stack" novalidate>
+            <div class="form-grid">
+              <div class="field span-2"><label for="area">Operational area</label><input id="area" name="area" maxlength="160"></div>
+              <div class="field"><label for="latitude">Latitude</label><input id="latitude" name="latitude" type="number" step="any" min="-90" max="90" required><span class="error"></span></div>
+              <div class="field"><label for="longitude">Longitude</label><input id="longitude" name="longitude" type="number" step="any" min="-180" max="180" required><span class="error"></span></div>
+              <div class="span-2"><button class="btn btn-secondary btn-sm" type="button" id="locate">Use my current location</button></div>
+              <div class="field"><label for="vehicle_type">Vehicle</label><select id="vehicle_type" name="vehicle_type"><option value="bike">Bicycle / two-wheeler</option><option value="car">Car</option><option value="van">Van</option><option value="on_foot">On foot</option></select></div>
+              <div class="field"><label for="vehicle_capacity_kg">Carrying capacity (kg)</label><input id="vehicle_capacity_kg" name="vehicle_capacity_kg" type="number" min="1" step="1" required><span class="error"></span></div>
+              <div class="field"><label for="max_distance_km">Maximum travel distance (km)</label><input id="max_distance_km" name="max_distance_km" type="number" min="1" step="1" required><span class="error"></span></div>
+              <div class="field"><label for="constraints">Constraints</label><input id="constraints" name="constraints" maxlength="255"></div>
+            </div>
+            <div><button class="btn btn-primary" type="submit">Save profile</button></div>
+          </form>
+        </section>
+      </main>
+    </div>
+  </div>
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+  <script src="js/api.js"></script>
+  <script src="js/common.js"></script>
+  <script src="js/scoring.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script src="js/volunteer.js"></script>
+</body>
+</html>

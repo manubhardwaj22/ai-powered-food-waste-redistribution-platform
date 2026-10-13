@@ -1,0 +1,55 @@
+/* Tablet and mobile adjustments */
+
+@media (max-width: 1024px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: repeat(2, 1fr); }
+  .metric-strip { grid-template-columns: repeat(3, 1fr); }
+  .grid-3 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; }
+  .sidebar {
+    position: fixed; inset: 0 auto 0 0; width: 260px; z-index: 80; transform: translateX(-100%);
+    transition: transform 0.2s ease-out;
+  }
+  .sidebar.open { transform: none; box-shadow: 0 0 0 100vmax rgba(19, 38, 27, 0.45); }
+  .mobile-menu { display: inline-flex; }
+  .topbar { padding: var(--space-3) var(--space-4); }
+  .content { padding: var(--space-4); }
+  .panel { padding: var(--space-4); }
+  .grid-2 { grid-template-columns: 1fr; }
+  .notif-panel { right: var(--space-4); }
+
+  .auth-page { grid-template-columns: 1fr; }
+  .auth-aside { display: none; }
+
+  .menu-toggle { display: inline-flex; }
+  .site-nav {
+    display: none; position: absolute; top: 68px; left: 0; right: 0; flex-direction: column; align-items: stretch;
+    background: var(--surface); border-bottom: 1px solid var(--line); padding: var(--space-4);
+  }
+  .site-nav.open { display: flex; }
+  .problem-grid, .roles { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .form-grid { grid-template-columns: 1fr; }
+  .form-grid .span-2 { grid-column: auto; }
+  .steps { grid-template-columns: 1fr; }
+  .metric-strip { grid-template-columns: repeat(2, 1fr); }
+  .role-picker { grid-template-columns: 1fr; }
+  .score-legend { grid-template-columns: repeat(3, 1fr); }
+  .timeline { grid-template-columns: 1fr; }
+  .hbar { grid-template-columns: 7em 1fr 4em; }
+  .demo-card .controls label { grid-template-columns: 1fr 3.5em; }
+  .demo-card .controls label span:first-child { grid-column: span 2; }
+  .topbar h1 { font-size: 1.15rem; }
+  .toasts { left: 16px; right: 16px; }
+  .toast { max-width: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
